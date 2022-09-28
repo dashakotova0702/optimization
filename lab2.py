@@ -52,15 +52,17 @@ def golden_ratio(func):
     while eps_n > eps:
         count += 1
         if func_x_1 > func_x_2:
-            a_ = a
             a = x_1
-            x_1 = a_ + b - x_2
+            x_1 = x_2
+            func_x_1 = func_x_2
+            x_2 = a + (b - a) * (np.sqrt(5) - 1) / 2
+            func_x_2 = func.subs(x, x_2)
         if func_x_1 < func_x_2:
-            b_ = b
             b = x_2
-            x_2 = a + b_ - x_1
-        func_x_1 = func.subs(x, x_1)
-        func_x_2 = func.subs(x, x_2)
+            x_2 = x_1
+            func_x_2 = func_x_1
+            x_1 = b - (b - a) * (np.sqrt(5) - 1) / 2
+            func_x_1 = func.subs(x, x_1)
         eps_n = (b - a) / 2
     x_min = (a + b) / 2
     func_x_min = func.subs(x, x_min)
@@ -83,5 +85,5 @@ if __name__ == "__main__":
     func = x * pow((pow(x, 3)+1), 0.5)-pow(x, 2)
     print('                             x_min               f(x)_min    iteration')
     print('Метод дихотомии:           ', dichotomy_method(func))
-    print('Метод золотого сечения:', golden_ratio(func))
+    print('Метод золотого сечения:    ', golden_ratio(func))
     plt.show()
