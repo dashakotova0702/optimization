@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from sympy import *
+import math
 
 def parabola_method(func):
     x, z = symbols("x, z")
@@ -111,14 +112,12 @@ def chord_method(func):
     plt.title('Метод хорд')
     plt.xlabel('x')
     plt.ylabel('f(x)')
-    x_array = np.arange(-0.99, 2.01, 0.01)
+    x_array = np.arange(-1, 2.01, 0.01)
     func_array = np.zeros(x_array.size)
-    func_diff_array = np.zeros(x_array.size)
     for i in range(0, x_array.size, 1):
         func_array[i] = func.subs(x, x_array[i])
-        func_diff_array[i] = func_diff.subs(x, x_array[i])
     plt.plot(x_array, func_array, color='b', label='f(x)')
-    plt.plot(x_array, func_diff_array, color='g', label='f\'(x)')
+    #plt.plot(x_array, func_diff_array, color='g', label='f\'(x)')
     plt.plot(x_min, func_x_min, 'ro', label='min')
     plt.legend()
     plt.figure()
