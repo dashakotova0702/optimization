@@ -1,7 +1,6 @@
 import numpy as np
 
 def simplex(s_t, v_j, v_i, n, m, x):
-    print(s_t)
     count_iter = 0
     for j in range (1, n-1, 1):
         if s_t[m-2][j] > 0:
@@ -49,7 +48,7 @@ def simplex(s_t, v_j, v_i, n, m, x):
             if v_j[j] > 0:
                 if (not np.isclose(s_t[m-2][j], 0)) and np.sign(s_t[m-2][j]) > 0:
                     pos = 1
-        print(s_t)
+        print(s_t, "\n")
     x_array = np.zeros(x+1)
     x_array[0] = 1
     for i in range(0, m-2, 2):
@@ -58,7 +57,7 @@ def simplex(s_t, v_j, v_i, n, m, x):
 
 
 def classic_method():
-    simplex_table = np.array([[1, -1, 1, 0],
+    '''simplex_table = np.array([[1, -1, 1, 0],
                              [0, 0, 0, 0],
                              [2, 2, -1, 0],
                              [0, 0, 0, 0],
@@ -66,13 +65,26 @@ def classic_method():
                              [0, 0, 0, 0]], dtype='float')
     var_j = np.array([0, 3, 4, 0])
     var_i = np.array([1, 1, 2, 2, 0, 0])
+    L_coeff = np.array([0, 5, 1, -3, 2])'''
+    simplex_table = np.array([[8,4,1,2,1,0],
+                              [0,0,0,0,0,0],
+                              [2,2,-1,1,0,0],
+                              [0,0,0,0,0,0],
+                              [2,1,1,0,1,0],
+                              [0,0,0,0,0,0],
+                              [4,3,0,1,1,0],
+                              [0,0,0,0,0,0]], dtype='float')
+    var_j = np.array([0, 1, 2, 4, 5, 0])
+    var_i = np.array([3, 3, -1, -1, 2, 2, 0, 0])
     L_coeff = np.array([0, 5, 1, -3, 2])
+    print("Classic simplex method\n")
+    print("Start table\n", simplex_table, "\n")
     x_array, count_iter, s_t, var_j, var_i = simplex(simplex_table, var_j, var_i, var_j.size, var_i.size, L_coeff.size-1)
     L = 0
     for i in range(1, x_array.size, 1):
         print("x", i, "=", x_array[i])
         L += L_coeff[i] * x_array[i]
-    print("L_min =", L, "iteration =", count_iter)
+    print("L_min =", L, "iteration =", count_iter, "\n------------------------------")
 
 
 def v_method():
@@ -86,6 +98,8 @@ def v_method():
     var_i = np.array([-1, -1, -2, -2, 0, 0])
     L_coeff = np.array([0, 5, 1, -3, 2])
     count_iter = 0
+    print("V-method\n")
+    print("Start table\n", simplex_table, "\n")
     x_array, iter, s_t, var_j, var_i = simplex(simplex_table, var_j, var_i, var_j.size, var_i.size, L_coeff.size-1)
     count_iter += iter
     for j in range (0, var_j.size, 1):
@@ -103,12 +117,33 @@ def v_method():
     for i in range(1, x_array.size, 1):
         print("x", i, "=", x_array[i])
         L += L_coeff[i]*x_array[i]
-    print("L_min =", L, "iteration =", count_iter)
+    print("L_min =", L, "iteration =", count_iter, "\n------------------------------")
+
+def m_method():
+    M = 100
+    simplex_table = np.array([[7, 3, 2, 1, 1, 0],
+                             [0, 0, 0, 0, 0, 0],
+                             [11, 5, 3, 1, 2, 0],
+                             [0, 0, 0, 0, 0, 0],
+                             [18*M, 8*M-5, 5*M-1, 2*M+3, 3*M-2, 0],
+                             [0, 0, 0, 0, 0, 0]], dtype='float')
+    var_j = np.array([0, 1, 2, 3, 4, 0])
+    var_i = np.array([-1, -1, -2, -2, 0, 0])
+    L_coeff = np.array([0, 5, 1, -3, 2])
+    print("M-method\n")
+    print("Start table\n", simplex_table, "\n")
+    x_array, count_iter, s_t, var_j, var_i = simplex(simplex_table, var_j, var_i, var_j.size, var_i.size, L_coeff.size-1)
+    L = 0
+    for i in range(1, x_array.size, 1):
+        print("x", i, "=", x_array[i])
+        L += L_coeff[i] * x_array[i]
+    print("L_min =", L, "iteration =", count_iter, "\n------------------------------")
 
 
 if __name__ == "__main__":
     classic_method()
     v_method()
+    m_method()
 
 
 
