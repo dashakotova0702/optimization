@@ -57,7 +57,7 @@ def simplex(s_t, v_j, v_i, n, m, x):
 
 
 def classic_method():
-    '''simplex_table = np.array([[1, -1, 1, 0],
+    simplex_table = np.array([[1, -1, 1, 0],
                              [0, 0, 0, 0],
                              [2, 2, -1, 0],
                              [0, 0, 0, 0],
@@ -65,17 +65,6 @@ def classic_method():
                              [0, 0, 0, 0]], dtype='float')
     var_j = np.array([0, 3, 4, 0])
     var_i = np.array([1, 1, 2, 2, 0, 0])
-    L_coeff = np.array([0, 5, 1, -3, 2])'''
-    simplex_table = np.array([[8,4,1,2,1,0],
-                              [0,0,0,0,0,0],
-                              [2,2,-1,1,0,0],
-                              [0,0,0,0,0,0],
-                              [2,1,1,0,1,0],
-                              [0,0,0,0,0,0],
-                              [4,3,0,1,1,0],
-                              [0,0,0,0,0,0]], dtype='float')
-    var_j = np.array([0, 1, 2, 4, 5, 0])
-    var_i = np.array([3, 3, -1, -1, 2, 2, 0, 0])
     L_coeff = np.array([0, 5, 1, -3, 2])
     print("Classic simplex method\n")
     print("Start table\n", simplex_table, "\n")
@@ -88,7 +77,7 @@ def classic_method():
 
 
 def v_method():
-    simplex_table = np.array([[7, 3, 2, 1, 1, 0],
+    '''simplex_table = np.array([[7, 3, 2, 1, 1, 0],
                              [0, 0, 0, 0, 0, 0],
                              [11, 5, 3, 1, 2, 0],
                              [0, 0, 0, 0, 0, 0],
@@ -96,7 +85,18 @@ def v_method():
                              [0, 0, 0, 0, 0, 0]], dtype='float')
     var_j = np.array([0, 1, 2, 3, 4, 0])
     var_i = np.array([-1, -1, -2, -2, 0, 0])
-    L_coeff = np.array([0, 5, 1, -3, 2])
+    L_coeff = np.array([0, 5, 1, -3, 2])'''
+    simplex_table = np.array([[8, 4, 1, 2, 1, 0],
+                              [0, 0, 0, 0, 0, 0],
+                              [2, 2, -1, 1, 0, 0],
+                              [0, 0, 0, 0, 0, 0],
+                              [2, 1, 1, 0, 1, 0],
+                              [0, 0, 0, 0, 0, 0],
+                              [4, 3, 0, 1, 1, 0],
+                              [0, 0, 0, 0, 0, 0]], dtype='float')
+    var_j = np.array([0, 1, 2, 4, 5, 0])
+    var_i = np.array([3, 3, -1, -1, -2, -2, 0, 0])
+    L_coeff = np.array([0, 6, 0, -1, 1, 2])
     count_iter = 0
     print("V-method\n")
     print("Start table\n", simplex_table, "\n")
@@ -141,9 +141,9 @@ def m_method():
 
 
 if __name__ == "__main__":
-    classic_method()
+    #classic_method()
     v_method()
-    m_method()
+    #m_method()
 
 
 
